@@ -50,23 +50,50 @@
  *   writePostcard("Guddu", "Dadi ji", "Hum theek hain")
  *   isValidPincode("400001")   // => true
  *   countVowels("Namaste")     // => 3
+ * 
+ * Example: writePostcard("Guddu", "Dadi ji", "Hum theek hain")
+ *                 => "Priy Dadi ji,\n\nHum theek hain\n\nAapka/Aapki,\nGuddu"
  */
+
+
 export function writePostcard(sender, receiver, message) {
-  // Your code here
+  if(typeof sender !== "string" || typeof receiver !== "string" ||typeof message !== "string") return ""
+
+  sender = sender.trim()
+  message = message.trim()
+  receiver = receiver.trim()
+
+  if(sender === "" || receiver === "" || message === "") return ""
+
+  return `Priy ${receiver},
+
+${message}
+
+Aapka/Aapki,
+${sender}`
 }
 
 export function isValidPincode(code) {
-  // Your code here
+  if(typeof code !== "string" || code.startsWith("0")) return false
+  if(code.length === 6 && /^\d+$/.test(code)) return true
+  else return false
 }
 
 export function formatPostcardField(label, value, width) {
-  // Your code here
+  if(typeof label !== "string" || typeof value !== "string") return ""
+
+  return label.padEnd(width ?? 12) + ": " + value
 }
 
 export function isFromState(address, stateCode) {
-  // Your code here
+  if(typeof address !== "string" || typeof stateCode !== "string") return false
+
+  return address.endsWith(stateCode)
 }
 
 export function countVowels(message) {
-  // Your code here
+  if(typeof message !== "string" || message === null) return 0
+
+  let vob = message.match(/[aeiouAEIOU]/g)
+  return vob ? vob.length : 0
 }
